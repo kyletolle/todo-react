@@ -36,3 +36,47 @@
     transform: rotate(360deg);
   }
 }
+
+.App-form {
+  padding-top: 1em;
+}
+
+.App-form input[type=text] {
+  border: 1px solid #61dafb;
+  border-radius: .5em;
+  padding: 1em;
+  margin: 0 0 1em;
+  display: block;
+  width: 50em;
+  color: white;
+  background: #3C4048;
+}
+
+.App-form input::placeholder {
+  color: #118AAB;
+}
+
+.App-form hr {
+  border: 1px solid #61dafb;
+  margin: 2em 0;
+}
+
+.App-form label {
+  border: 1px solid #61dafb;
+  padding: 1em;
+  margin: 0 0 1em;
+  display: inline-block;
+  width: 15em;
+}
+
+.App-form label:hover {
+  background: #464A52;
+  cursor: pointer;
+}
+
+.App-form input[type=checkbox] {
+  margin-right: 1em;
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+}
