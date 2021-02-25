@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
 }
 
 .App-logo {
@@ -43,9 +42,6 @@
 
 .App-form li {
   list-style:none;
-  background-image:none;
-  background-repeat:none;
-  background-position:0;
 }
 
 
@@ -71,12 +67,20 @@
   margin: 2em 0;
 }
 
+.App-form ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .App-form label {
   border: 1px solid #61dafb;
   padding: 1em;
   margin: 0 0 1em;
-  display: inline-block;
   width: 15em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .App-form label:hover {
@@ -85,11 +89,15 @@
   color: #3C4048;
 }
 
+
 .App-form input[type=checkbox] {
   margin-right: 1em;
-  width: 2em;
-  height: 2em;
-  vertical-align: middle;
+  min-width: 2em;
+  min-height: 2em;
+}
+
+.App-form label span {
+  flex-grow: 2;
 }
 
 .App-form li.disabled label {

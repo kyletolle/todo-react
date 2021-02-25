@@ -42,7 +42,9 @@ function App() {
       <li key={todoKey} className={todoItemClassName}>
         <label>
           <input type={"checkbox"} id={todoId} checked={todoItem.checked} onChange={toggleCheckbox} />
-          {todoItem.text}
+          <span>
+            {todoItem.text}
+          </span>
         </label>
       </li>
     );
