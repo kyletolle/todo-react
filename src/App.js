@@ -1,9 +1,23 @@
 import './App.css';
-import { useState }  from 'react'
+import { useEffect, useState }  from 'react'
 
 
 function App() {
   const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    // Load from localstorage if data is there
+    const existingTodoDataString = window.localStorage.getItem('tododata');
+    if (!existingTodoDataString) { return; }
+
+    const existingTodoData = JSON.parse(existingTodoDataString);
+    setTodos(existingTodoData.todos)
+  }, []);
+
+  useEffect(() => {
+    // Write to localstorage when todos change
+    window.localStorage.setItem('tododata', JSON.stringify({ todos: todos }));
+  }, [todos])
 
   const handleAddTodo = (formSubmitEvent) => {
     const todoElement = document.getElementById('addTodo')
