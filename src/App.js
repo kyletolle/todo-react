@@ -5,7 +5,7 @@ import { useState }  from 'react'
 function App() {
   const [todos, setTodos] = useState([]);
 
-  const handleAddTodo = (event) => {
+  const handleAddTodo = (formSubmitEvent) => {
     const todoElement = document.getElementById('addTodo')
     const todoText = todoElement.value;
 
@@ -16,34 +16,39 @@ function App() {
 
     setTodos([todo, ...todos]);
     todoElement.value = '';
-    event.preventDefault();
+    formSubmitEvent.preventDefault();
   }
 
   const todoElements = todos.map((todoItem, todoIndex) => {
     const todoId = `todoItem${todoIndex}`;
     const todoKey = `${todoIndex}`;
 
-    const handleChange = (event) => {
-      const isChecked = event.target.value === 'on';
+    const toggleCheckbox = (toggleCheckboxEvent) => {
+      console.info("checkbox target...", toggleCheckboxEvent.target);
+      console.info("checkbox target value...", toggleCheckboxEvent.target.value);
+      const newChecked = !todoItem.checked;
+      console.info("isChecked", newChecked)
       const newTodoItem = {
         ...todoItem,
-        checked: isChecked
+        checked: newChecked,
       };
       const newTodos = [...todos];
       newTodos[todoIndex] = newTodoItem;
       setTodos(newTodos);
     };
 
+    const todoItemClassName = todoItem.checked ? 'disabled' : '';
     return (
-      <div key={todoKey}>
+      <li key={todoKey} className={todoItemClassName}>
         <label>
-          <input type={"checkbox"} id={todoId} checked={todoItem.checked} onChange={handleChange} />
+          <input type={"checkbox"} id={todoId} checked={todoItem.checked} onChange={toggleCheckbox} />
           {todoItem.text}
         </label>
-      </div>
+      </li>
     );
   })
 
+  const emptyStateMessage = <li><p>Try adding a Todo above!</p></li>;
   return (
     <div className="App">
       <header className="App-header">
@@ -52,10 +57,9 @@ function App() {
             <input type={"text"} id="addTodo" placeholder="Add a Todo"></input>
           </div>
           <hr />
-          {todoElements.length > 0 ? todoElements :
-          (
-            <div>Try adding a Todo above!</div>
-          )}
+          <ul>
+            {todoElements.length > 0 ? todoElements : emptyStateMessage }
+          </ul>
         </form>
       </header>
     </div>

@@ -41,6 +41,14 @@
   padding-top: 1em;
 }
 
+.App-form li {
+  list-style:none;
+  background-image:none;
+  background-repeat:none;
+  background-position:0;
+}
+
+
 .App-form input[type=text] {
   border: 1px solid #61dafb;
   border-radius: .5em;
@@ -50,7 +58,9 @@
   width: 50em;
   color: white;
   background: #3C4048;
+
 }
+
 
 .App-form input::placeholder {
   color: #118AAB;
@@ -70,8 +80,9 @@
 }
 
 .App-form label:hover {
-  background: #464A52;
+  background: #c5ffff;
   cursor: pointer;
+  color: #3C4048;
 }
 
 .App-form input[type=checkbox] {
@@ -79,4 +90,19 @@
   width: 2em;
   height: 2em;
   vertical-align: middle;
+}
+
+.App-form li.disabled label {
+  color: grey;
+  border: 1px solid grey;
+}
+
+.App-form li.disabled label:hover {
+  background: #464A52;
+  cursor: pointer;
+}
+
+.App-form li.disabled input[type=checkbox] {
+  border: 1px solid grey;
+  opacity: 0.5;
 }
