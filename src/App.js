@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect, useState }  from 'react'
-import TodoItem from './TodoItem';
-
+import TodoList from './TodoList';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -34,25 +33,9 @@ function App() {
     formSubmitEvent.preventDefault();
   }
 
-  const todoElements = todos.map((todoItem, todoIndex) => {
-    const toggleCheckbox = (toggleCheckboxEvent) => {
-      console.info("checkbox target...", toggleCheckboxEvent.target);
-      console.info("checkbox target value...", toggleCheckboxEvent.target.value);
-      const newChecked = !todoItem.checked;
-      console.info("isChecked", newChecked)
-      const newTodoItem = {
-        ...todoItem,
-        checked: newChecked,
-      };
-      const newTodos = [...todos];
-      newTodos[todoIndex] = newTodoItem;
-      setTodos(newTodos);
-    };
-
-    return <TodoItem index={todoIndex} text={todoItem.text} checked={todoItem.checked} toggleChecked={toggleCheckbox} />
-  })
-
-  const emptyStateMessage = <li><p>Try adding a Todo above!</p></li>;
+  const handleTodosChanged = newTodos => {
+    setTodos(newTodos);
+  }
 
   return (
     <div className="App">
@@ -61,10 +44,10 @@ function App() {
           <div>
             <input type={"text"} id="addTodo" placeholder="Add a Todo"></input>
           </div>
+
           <hr />
-          <ul>
-            {todoElements.length > 0 ? todoElements : emptyStateMessage }
-          </ul>
+
+          <TodoList todos={todos} handleTodosChanged={handleTodosChanged} />
         </form>
       </header>
     </div>
