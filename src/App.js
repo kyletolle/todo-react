@@ -1,6 +1,7 @@
 import './App.css';
 import { useEffect, useState }  from 'react'
 import TodoList from './TodoList';
+import AddTodo from './AddTodo';
 
 function App() {
   const [todos, setTodos] = useState([]);
@@ -41,10 +42,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <form className="App-form" onSubmit={handleAddTodo}>
-          <div>
-            <input type={"text"} id="addTodo" placeholder="Add a Todo"></input>
-          </div>
-
+          <AddTodo />
           <hr />
 
           <TodoList todos={todos} handleTodosChanged={handleTodosChanged} />
