@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState }  from 'react'
+import TodoItem from './TodoItem';
 
 
 function App() {
@@ -34,9 +35,6 @@ function App() {
   }
 
   const todoElements = todos.map((todoItem, todoIndex) => {
-    const todoId = `todoItem${todoIndex}`;
-    const todoKey = `${todoIndex}`;
-
     const toggleCheckbox = (toggleCheckboxEvent) => {
       console.info("checkbox target...", toggleCheckboxEvent.target);
       console.info("checkbox target value...", toggleCheckboxEvent.target.value);
@@ -51,20 +49,11 @@ function App() {
       setTodos(newTodos);
     };
 
-    const todoItemClassName = todoItem.checked ? 'disabled' : '';
-    return (
-      <li key={todoKey} className={todoItemClassName}>
-        <label>
-          <input type={"checkbox"} id={todoId} checked={todoItem.checked} onChange={toggleCheckbox} />
-          <span>
-            {todoItem.text}
-          </span>
-        </label>
-      </li>
-    );
+    return <TodoItem index={todoIndex} text={todoItem.text} checked={todoItem.checked} toggleChecked={toggleCheckbox} />
   })
 
   const emptyStateMessage = <li><p>Try adding a Todo above!</p></li>;
+
   return (
     <div className="App">
       <header className="App-header">
