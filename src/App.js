@@ -43,6 +43,7 @@ function App() {
       <header className="App-header">
         <form className="App-form" onSubmit={handleAddTodo}>
           <AddTodo />
+
           <hr />
 
           <TodoList todos={todos} handleTodosChanged={handleTodosChanged} />
