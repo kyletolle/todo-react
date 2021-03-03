@@ -16,6 +16,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "lint": "eslint",
+    "format": "prettier --check **/*.{js,jsx,css}",
+    "format:fix": "npx prettier --write **/*.{js,jsx,css}",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
