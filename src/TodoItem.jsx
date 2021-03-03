@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from "@emotion/styled";
 
 function UnstyledTodoItem({
@@ -19,31 +20,33 @@ function UnstyledTodoItem({
 
   return (
     <li key={todoKey} className={`${className} ${todoItemClassName}`}>
+      // eslint-disable-next-line jsx-a11y/label-has-associated-control
       <label>
         <input
-          type={"checkbox"}
+          type="checkbox"
           id={todoId}
           checked={checked}
           onChange={toggleChecked}
         />
         <span className="todoText">{text}</span>
-        <span className="delete" onClick={handleDelete}>
+        <button type="button" className="delete" onClick={handleDelete}>
           x
-        </span>
+        </button>
       </label>
     </li>
   );
 }
 
 const TodoItem = styled(UnstyledTodoItem)`
-  span.delete {
+  .delete {
     opacity: 0.75;
-    display: block;
     background-color: darkred;
-    border: 1px solid darkred;
+    border: 1px solid red;
     border-radius: 2px;
-    padding: 0.25em;
+    height: 2em;
+    width: 2em;
     color: white;
+    text-align: center;
   }
 `;
 
