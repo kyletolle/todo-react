@@ -1,8 +1,11 @@
+import React from 'react';
+import styled from "@emotion/styled";
+import PropTypes from 'prop-types';
 import TodoItem from "./TodoItem";
 
-function TodoList({ todos, handleTodosChanged, handleTodoDeleted }) {
+function UnstyledTodoList({ className, todos, handleTodosChanged, handleTodoDeleted }) {
   const todoItems = todos.map((todoItem, todoIndex) => {
-    const toggleCheckbox = (_) => {
+    const toggleCheckbox = () => {
       const newChecked = !todoItem.checked;
       const newTodoItem = {
         ...todoItem,
@@ -32,7 +35,22 @@ function TodoList({ todos, handleTodosChanged, handleTodoDeleted }) {
     </li>
   );
 
-  return <ul>{todoItems.length > 0 ? todoItems : emptyStateMessage}</ul>;
+  return <ul className={className}>
+    {todoItems.length > 0 ? todoItems : emptyStateMessage}
+  </ul>;
 }
+
+UnstyledTodoList.propTypes = {
+  className: PropTypes.string.isRequired,
+  todos: PropTypes.arrayOf({ text: PropTypes.string, checked: PropTypes.bool }).isRequired,
+  handleTodosChanged: PropTypes.func.isRequired,
+  handleTodoDeleted: PropTypes.func.isRequired
+}
+
+const TodoList = styled(UnstyledTodoList)`
+  li {
+    list-style: none;
+  }
+`;
 
 export default TodoList;
