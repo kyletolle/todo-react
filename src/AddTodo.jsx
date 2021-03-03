@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "@emotion/styled";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function UnstyledAddTodo({ className }) {
   return (
@@ -12,7 +12,7 @@ function UnstyledAddTodo({ className }) {
 
 UnstyledAddTodo.propTypes = {
   className: PropTypes.string.isRequired,
-}
+};
 
 const AddTodo = styled(UnstyledAddTodo)`
   input[type="text"] {

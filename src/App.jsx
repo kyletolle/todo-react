@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import TodoList from "./TodoList";
 import AddTodo from "./AddTodo";
 
-function UnstyledApp({className}) {
+function UnstyledApp({ className }) {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function UnstyledApp({className}) {
 
 UnstyledApp.propTypes = {
   className: PropTypes.string.isRequired,
-}
+};
 
 const App = styled(UnstyledApp)`
   background-color: #282c34;

@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 import styled from "@emotion/styled";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function UnstyledTodoItem({
   className,
@@ -43,7 +43,7 @@ UnstyledTodoItem.propTypes = {
   text: PropTypes.string.isRequired,
   checked: PropTypes.bool.isRequired,
   toggleChecked: PropTypes.func.isRequired,
-  handleTodoDeleted: PropTypes.func.isRequired
+  handleTodoDeleted: PropTypes.func.isRequired,
 };
 
 const TodoItem = styled(UnstyledTodoItem)`
