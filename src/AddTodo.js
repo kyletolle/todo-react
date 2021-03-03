@@ -3,6 +3,6 @@ function AddTodo() {
     <div>
       <input type={"text"} id="addTodo" placeholder="Add a Todo" />
     </div>
-  )
+  );
 }
 export default AddTodo;

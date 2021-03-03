@@ -41,25 +41,22 @@
 }
 
 .App-form li {
-  list-style:none;
+  list-style: none;
 }
 
-
-.App-form input[type=text] {
+.App-form input[type="text"] {
   border: 1px solid #61dafb;
-  border-radius: .5em;
+  border-radius: 0.5em;
   padding: 1em;
   margin: 0 0 1em;
   display: block;
   width: 50em;
   color: white;
-  background: #3C4048;
-
+  background: #3c4048;
 }
 
-
 .App-form input::placeholder {
-  color: #118AAB;
+  color: #118aab;
 }
 
 .App-form hr {
@@ -86,17 +83,16 @@
 .App-form label:hover {
   background: #c5ffff;
   cursor: pointer;
-  color: #3C4048;
+  color: #3c4048;
 }
 
-
-.App-form input[type=checkbox] {
+.App-form input[type="checkbox"] {
   margin-right: 1em;
   min-width: 2em;
   min-height: 2em;
 }
 
-.App-form label span {
+.App-form label span.todoText {
   flex-grow: 2;
 }
 
@@ -106,11 +102,11 @@
 }
 
 .App-form li.disabled label:hover {
-  background: #464A52;
+  background: #464a52;
   cursor: pointer;
 }
 
-.App-form li.disabled input[type=checkbox] {
+.App-form li.disabled input[type="checkbox"] {
   border: 1px solid grey;
   opacity: 0.5;
 }
