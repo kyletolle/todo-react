@@ -1,42 +1,54 @@
-import './App.css';
-import { useEffect, useState }  from 'react'
-import TodoList from './TodoList';
-import AddTodo from './AddTodo';
+import "./App.css";
+import { useEffect, useState } from "react";
+import TodoList from "./TodoList";
+import AddTodo from "./AddTodo";
 
 function App() {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
     // Load from localstorage if data is there
-    const existingTodoDataString = window.localStorage.getItem('tododata');
-    if (!existingTodoDataString) { return; }
+    const existingTodoDataString = window.localStorage.getItem("tododata");
+    if (!existingTodoDataString) {
+      return;
+    }
 
     const existingTodoData = JSON.parse(existingTodoDataString);
-    setTodos(existingTodoData.todos)
+    setTodos(existingTodoData.todos);
   }, []);
 
   useEffect(() => {
     // Write to localstorage when todos change
-    window.localStorage.setItem('tododata', JSON.stringify({ todos: todos }));
-  }, [todos])
+    window.localStorage.setItem("tododata", JSON.stringify({ todos: todos }));
+  }, [todos]);
 
   const handleAddTodo = (formSubmitEvent) => {
-    const todoElement = document.getElementById('addTodo')
+    formSubmitEvent.preventDefault();
+
+    const todoElement = document.getElementById("addTodo");
     const todoText = todoElement.value;
 
     const todo = {
       text: todoText,
       checked: false,
-    }
+    };
 
-    setTodos([todo, ...todos]);
-    todoElement.value = '';
-    formSubmitEvent.preventDefault();
-  }
-
-  const handleTodosChanged = newTodos => {
+    const newTodos = [todo, ...todos];
     setTodos(newTodos);
-  }
+    todoElement.value = "";
+  };
+
+  const handleTodosChanged = (newTodos) => {
+    setTodos(newTodos);
+  };
+
+  const handleTodoDeleted = (todoIndex) => {
+    console.info("Handling a Todo Delete");
+    // TODO: Delete the TODO
+    let newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    setTodos(newTodos);
+  };
 
   return (
     <div className="App">
@@ -46,7 +58,11 @@ function App() {
 
           <hr />
 
-          <TodoList todos={todos} handleTodosChanged={handleTodosChanged} />
+          <TodoList
+            todos={todos}
+            handleTodosChanged={handleTodosChanged}
+            handleTodoDeleted={handleTodoDeleted}
+          />
         </form>
       </header>
     </div>

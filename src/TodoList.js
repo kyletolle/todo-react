@@ -1,8 +1,8 @@
-import TodoItem from './TodoItem';
+import TodoItem from "./TodoItem";
 
-function TodoList({todos, handleTodosChanged}) {
+function TodoList({ todos, handleTodosChanged, handleTodoDeleted }) {
   const todoItems = todos.map((todoItem, todoIndex) => {
-    const toggleCheckbox = _ => {
+    const toggleCheckbox = (_) => {
       const newChecked = !todoItem.checked;
       const newTodoItem = {
         ...todoItem,
@@ -13,16 +13,26 @@ function TodoList({todos, handleTodosChanged}) {
       handleTodosChanged(newTodos);
     };
 
-    return <TodoItem index={todoIndex} text={todoItem.text} checked={todoItem.checked} toggleChecked={toggleCheckbox} />
-  })
+    const todoKey = `${todoIndex}`;
+    return (
+      <TodoItem
+        key={todoKey}
+        index={todoIndex}
+        text={todoItem.text}
+        checked={todoItem.checked}
+        toggleChecked={toggleCheckbox}
+        handleTodoDeleted={handleTodoDeleted}
+      />
+    );
+  });
 
-  const emptyStateMessage = <li><p>Try adding a Todo above!</p></li>;
-
-  return (
-    <ul>
-      {todoItems.length > 0 ? todoItems : emptyStateMessage }
-    </ul>
+  const emptyStateMessage = (
+    <li>
+      <p>Try adding a Todo above!</p>
+    </li>
   );
+
+  return <ul>{todoItems.length > 0 ? todoItems : emptyStateMessage}</ul>;
 }
 
 export default TodoList;
