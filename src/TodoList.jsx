@@ -57,6 +57,7 @@ UnstyledTodoList.propTypes = {
 
 const TodoList = styled(UnstyledTodoList)`
   li {
+    /* Specify this style here so the empty state will get it too. */
     list-style: none;
   }
 `;

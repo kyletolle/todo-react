@@ -55,12 +55,16 @@ const TodoItem = styled(UnstyledTodoItem)`
     display: flex;
     flex-direction: row;
     align-items: center;
-  }
 
-  label:hover {
-    background: #c5ffff;
-    cursor: pointer;
-    color: #3c4048;
+    :hover {
+      background: #c5ffff;
+      cursor: pointer;
+      color: #3c4048;
+    }
+
+    span.todoText {
+      flex-grow: 2;
+    }
   }
 
   input[type="checkbox"] {
@@ -69,23 +73,21 @@ const TodoItem = styled(UnstyledTodoItem)`
     min-height: 2em;
   }
 
-  label span.todoText {
-    flex-grow: 2;
-  }
+  &.disabled {
+    label {
+      color: grey;
+      border: 1px solid grey;
 
-  li.disabled label {
-    color: grey;
-    border: 1px solid grey;
-  }
+      :hover {
+        background: #464a52;
+        cursor: pointer;
+      }
+    }
 
-  li.disabled label:hover {
-    background: #464a52;
-    cursor: pointer;
-  }
-
-  li.disabled input[type="checkbox"] {
-    border: 1px solid grey;
-    opacity: 0.5;
+    input[type="checkbox"] {
+      border: 1px solid grey;
+      opacity: 0.5;
+    }
   }
 
   .delete {
