@@ -1,22 +1,23 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import { observer } from 'mobx-react-lite';
 
 
-function UnstyledTodoItem({
+const UnstyledTodoItem = observer(({
   className,
   index,
   text,
-  checked,
+  completed,
   toggleChecked,
   handleTodoDeleted,
   handleDragStart,
   handleDragOver,
   handleDrop,
-}) {
+}) => {
   const todoId = `todoItem${index}`;
   const todoKey = `${index}`;
-  const todoItemClassName = checked ? "disabled" : "";
+  const todoItemClassName = completed ? "disabled" : "";
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -33,12 +34,14 @@ function UnstyledTodoItem({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
+
+      { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
       <label>
         <span className="dragIcon">≔</span>
         <input
           type="checkbox"
           id={todoId}
-          checked={checked}
+          checked={completed}
           onChange={toggleChecked}
         />
         <span className="todoText">{text}</span>
@@ -48,13 +51,13 @@ function UnstyledTodoItem({
       </label>
     </li>
   );
-}
+});
 
 UnstyledTodoItem.propTypes = {
   className: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
+  completed: PropTypes.bool.isRequired,
   toggleChecked: PropTypes.func.isRequired,
   handleTodoDeleted: PropTypes.func.isRequired,
   handleDragStart: PropTypes.func.isRequired,

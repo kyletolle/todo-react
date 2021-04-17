@@ -1,23 +1,26 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import { observer } from 'mobx-react-lite';
 import TodoItem from "./TodoItem";
+import { ObservableTodoStore } from "./ObservableTodoStore";
 
-function UnstyledTodoList({
+const UnstyledTodoList = observer(({
   className,
-  todos,
+  todoStore,
   handleTodosChanged,
   handleTodoDeleted,
   handleDragStart,
   handleDragOver,
   handleDrop,
-}) {
+}) => {
+  const { todos } = todoStore;
   const todoItems = todos.map((todoItem, todoIndex) => {
     const toggleCheckbox = () => {
-      const newChecked = !todoItem.checked;
+      const newCompleted = !todoItem.completed;
       const newTodoItem = {
         ...todoItem,
-        checked: newChecked,
+        completed: newCompleted,
       };
       const newTodos = [...todos];
       newTodos[todoIndex] = newTodoItem;
@@ -30,7 +33,7 @@ function UnstyledTodoList({
         key={todoKey}
         index={todoIndex}
         text={todoItem.text}
-        checked={todoItem.checked}
+        completed={todoItem.completed}
         toggleChecked={toggleCheckbox}
         handleTodoDeleted={handleTodoDeleted}
         handleDragStart={handleDragStart}
@@ -51,12 +54,13 @@ function UnstyledTodoList({
       {todoItems.length > 0 ? todoItems : emptyStateMessage}
     </ul>
   );
-}
+});
 
 UnstyledTodoList.propTypes = {
   className: PropTypes.string.isRequired,
-  todos: PropTypes.arrayOf({ text: PropTypes.string, checked: PropTypes.bool })
-    .isRequired,
+  // todos: PropTypes.arrayOf({ text: PropTypes.string, checked: PropTypes.bool })
+  //   .isRequired,
+  todoStore: PropTypes.instanceOf(ObservableTodoStore).isRequired,
   handleTodosChanged: PropTypes.func.isRequired,
   handleTodoDeleted: PropTypes.func.isRequired,
   handleDragStart: PropTypes.func.isRequired,
