@@ -30,10 +30,6 @@ const UnstyledApp = observer(({ className, todoStore }) => {
     todoElement.value = "";
   };
 
-  const handleTodoDeleted = (todoIndex) => {
-    todoStore.deleteTodoAt(todoIndex)
-  };
-
   const handleDragStart = (dragEvent) => {
     // Access the "data-position" attr of the current element being dragged
     const initialPosition = Number(dragEvent.currentTarget.dataset.position);
@@ -101,7 +97,6 @@ const UnstyledApp = observer(({ className, todoStore }) => {
 
         <TodoList
           todoStore={todoStore}
-          handleTodoDeleted={handleTodoDeleted}
           handleDragStart={handleDragStart}
           handleDragOver={handleDragOver}
           handleDrop={handleDrop}

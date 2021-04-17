@@ -8,7 +8,6 @@ import { ObservableTodoStore } from "./ObservableTodoStore";
 const UnstyledTodoList = observer(({
   className,
   todoStore,
-  handleTodoDeleted,
   handleDragStart,
   handleDragOver,
   handleDrop,
@@ -24,11 +23,11 @@ const UnstyledTodoList = observer(({
     return (
       <TodoItem
         key={todoKey}
+        todoStore={todoStore}
         index={todoIndex}
         text={todoItem.text}
         completed={todoItem.completed}
         toggleChecked={toggleCheckbox}
-        handleTodoDeleted={handleTodoDeleted}
         handleDragStart={handleDragStart}
         handleDragOver={handleDragOver}
         handleDrop={handleDrop}
@@ -52,7 +51,6 @@ const UnstyledTodoList = observer(({
 UnstyledTodoList.propTypes = {
   className: PropTypes.string.isRequired,
   todoStore: PropTypes.instanceOf(ObservableTodoStore).isRequired,
-  handleTodoDeleted: PropTypes.func.isRequired,
   handleDragStart: PropTypes.func.isRequired,
   handleDragOver: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
