@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
+import { observer } from 'mobx-react-lite';
 import TodoList from "./TodoList";
 import AddTodo from "./AddTodo";
+import todoStore from "./ObservableTodoStore";
 
 // Following drag and drop tutorial at
 // https://dev.to/florantara/creating-a-drag-and-drop-list-with-react-hooks-4c0i
@@ -14,51 +16,18 @@ const initialDnDState = {
   updatedOrder: [],
 }
 
-function UnstyledApp({ className }) {
-  const [todos, setTodos] = useState([]);
+const UnstyledApp = observer(({ className }) => {
+  const { todos } = todoStore;
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
-
-  useEffect(() => {
-    // Load from localstorage if data is there
-    const existingTodoDataString = window.localStorage.getItem("tododata");
-    if (!existingTodoDataString) {
-      return;
-    }
-
-    const existingTodoData = JSON.parse(existingTodoDataString);
-    setTodos(existingTodoData.todos);
-  }, []);
-
-  useEffect(() => {
-    // Write to localstorage when todos change
-    window.localStorage.setItem("tododata", JSON.stringify({ todos }));
-  }, [todos]);
 
   const handleAddTodo = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
 
     const todoElement = document.getElementById("addTodo");
-    const todoText = todoElement.value;
+    const newTodoText = todoElement.value;
 
-    const todo = {
-      text: todoText,
-      checked: false,
-    };
-
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
+    todoStore.addTodo(newTodoText)
     todoElement.value = "";
-  };
-
-  const handleTodosChanged = (newTodos) => {
-    setTodos(newTodos);
-  };
-
-  const handleTodoDeleted = (todoIndex) => {
-    console.info("Handling a Todo Delete");
-    const newTodos = [...todos];
-    newTodos.splice(todoIndex, 1);
-    setTodos(newTodos);
   };
 
   const handleDragStart = (dragEvent) => {
@@ -108,7 +77,7 @@ function UnstyledApp({ className }) {
   };
 
   const handleDrop = () => {
-    setTodos(dragAndDrop.updatedOrder);
+    todoStore.setTodos(dragAndDrop.updatedOrder);
 
     // Reset the state of the drag and drop
     setDragAndDrop({
@@ -127,9 +96,7 @@ function UnstyledApp({ className }) {
         <hr />
 
         <TodoList
-          todos={todos}
-          handleTodosChanged={handleTodosChanged}
-          handleTodoDeleted={handleTodoDeleted}
+          todoStore={todoStore}
           handleDragStart={handleDragStart}
           handleDragOver={handleDragOver}
           handleDrop={handleDrop}
@@ -137,7 +104,7 @@ function UnstyledApp({ className }) {
       </form>
     </div>
   );
-}
+});
 
 UnstyledApp.propTypes = {
   className: PropTypes.string.isRequired,

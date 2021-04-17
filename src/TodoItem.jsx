@@ -1,26 +1,31 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import { observer } from 'mobx-react-lite';
+import todoStore from "./ObservableTodoStore";
 
 
-function UnstyledTodoItem({
+const UnstyledTodoItem = observer(({
   className,
   index,
-  text,
-  checked,
-  toggleChecked,
-  handleTodoDeleted,
+  todo,
   handleDragStart,
   handleDragOver,
   handleDrop,
-}) {
+}) => {
+  const { completed, text } = todo;
   const todoId = `todoItem${index}`;
   const todoKey = `${index}`;
-  const todoItemClassName = checked ? "disabled" : "";
+  const todoItemClassName = completed ? "disabled" : "";
+
+  const toggleCompleted = () => {
+    // eslint-disable-next-line no-param-reassign
+    todo.completed = !todo.completed
+  };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    handleTodoDeleted(index);
+    todoStore.deleteTodoAt(index)
   };
 
   return (
@@ -33,13 +38,15 @@ function UnstyledTodoItem({
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
+
+      { /* eslint-disable-next-line jsx-a11y/label-has-associated-control */ }
       <label>
         <span className="dragIcon">≔</span>
         <input
           type="checkbox"
           id={todoId}
-          checked={checked}
-          onChange={toggleChecked}
+          checked={completed}
+          onChange={toggleCompleted}
         />
         <span className="todoText">{text}</span>
         <button type="button" className="delete" onClick={handleDelete}>
@@ -48,15 +55,12 @@ function UnstyledTodoItem({
       </label>
     </li>
   );
-}
+});
 
 UnstyledTodoItem.propTypes = {
   className: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  checked: PropTypes.bool.isRequired,
-  toggleChecked: PropTypes.func.isRequired,
-  handleTodoDeleted: PropTypes.func.isRequired,
+  todo: PropTypes.shape({ text: PropTypes.string.isRequired, completed: PropTypes.bool.isRequired}).isRequired,
   handleDragStart: PropTypes.func.isRequired,
   handleDragOver: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
