@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { observer } from 'mobx-react-lite';
@@ -28,10 +28,6 @@ const UnstyledApp = observer(({ className, todoStore }) => {
 
     todoStore.addTodo(newTodoText)
     todoElement.value = "";
-  };
-
-  const handleTodosChanged = (newTodos) => {
-    todoStore.setTodos(newTodos);
   };
 
   const handleTodoDeleted = (todoIndex) => {
@@ -105,7 +101,6 @@ const UnstyledApp = observer(({ className, todoStore }) => {
 
         <TodoList
           todoStore={todoStore}
-          handleTodosChanged={handleTodosChanged}
           handleTodoDeleted={handleTodoDeleted}
           handleDragStart={handleDragStart}
           handleDragOver={handleDragOver}

@@ -8,7 +8,6 @@ import { ObservableTodoStore } from "./ObservableTodoStore";
 const UnstyledTodoList = observer(({
   className,
   todoStore,
-  handleTodosChanged,
   handleTodoDeleted,
   handleDragStart,
   handleDragOver,
@@ -17,14 +16,8 @@ const UnstyledTodoList = observer(({
   const { todos } = todoStore;
   const todoItems = todos.map((todoItem, todoIndex) => {
     const toggleCheckbox = () => {
-      const newCompleted = !todoItem.completed;
-      const newTodoItem = {
-        ...todoItem,
-        completed: newCompleted,
-      };
-      const newTodos = [...todos];
-      newTodos[todoIndex] = newTodoItem;
-      handleTodosChanged(newTodos);
+      // eslint-disable-next-line no-param-reassign
+      todoItem.completed = !todoItem.completed
     };
 
     const todoKey = `${todoIndex}`;
@@ -58,10 +51,7 @@ const UnstyledTodoList = observer(({
 
 UnstyledTodoList.propTypes = {
   className: PropTypes.string.isRequired,
-  // todos: PropTypes.arrayOf({ text: PropTypes.string, checked: PropTypes.bool })
-  //   .isRequired,
   todoStore: PropTypes.instanceOf(ObservableTodoStore).isRequired,
-  handleTodosChanged: PropTypes.func.isRequired,
   handleTodoDeleted: PropTypes.func.isRequired,
   handleDragStart: PropTypes.func.isRequired,
   handleDragOver: PropTypes.func.isRequired,
