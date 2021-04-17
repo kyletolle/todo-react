@@ -8,6 +8,9 @@ function UnstyledTodoList({
   todos,
   handleTodosChanged,
   handleTodoDeleted,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
 }) {
   const todoItems = todos.map((todoItem, todoIndex) => {
     const toggleCheckbox = () => {
@@ -30,6 +33,9 @@ function UnstyledTodoList({
         checked={todoItem.checked}
         toggleChecked={toggleCheckbox}
         handleTodoDeleted={handleTodoDeleted}
+        handleDragStart={handleDragStart}
+        handleDragOver={handleDragOver}
+        handleDrop={handleDrop}
       />
     );
   });
@@ -53,6 +59,9 @@ UnstyledTodoList.propTypes = {
     .isRequired,
   handleTodosChanged: PropTypes.func.isRequired,
   handleTodoDeleted: PropTypes.func.isRequired,
+  handleDragStart: PropTypes.func.isRequired,
+  handleDragOver: PropTypes.func.isRequired,
+  handleDrop: PropTypes.func.isRequired,
 };
 
 const TodoList = styled(UnstyledTodoList)`

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 
+
 function UnstyledTodoItem({
   className,
   index,
@@ -9,6 +10,9 @@ function UnstyledTodoItem({
   checked,
   toggleChecked,
   handleTodoDeleted,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
 }) {
   const todoId = `todoItem${index}`;
   const todoKey = `${index}`;
@@ -20,8 +24,17 @@ function UnstyledTodoItem({
   };
 
   return (
-    <li key={todoKey} className={`${className} ${todoItemClassName}`}>
+    <li
+      key={todoKey}
+      className={`${className} ${todoItemClassName}`}
+      draggable
+      data-position={index}
+      onDragStart={handleDragStart}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >
       <label>
+        <span className="dragIcon">≔</span>
         <input
           type="checkbox"
           id={todoId}
@@ -44,6 +57,9 @@ UnstyledTodoItem.propTypes = {
   checked: PropTypes.bool.isRequired,
   toggleChecked: PropTypes.func.isRequired,
   handleTodoDeleted: PropTypes.func.isRequired,
+  handleDragStart: PropTypes.func.isRequired,
+  handleDragOver: PropTypes.func.isRequired,
+  handleDrop: PropTypes.func.isRequired,
 };
 
 const TodoItem = styled(UnstyledTodoItem)`
@@ -99,6 +115,10 @@ const TodoItem = styled(UnstyledTodoItem)`
     width: 2em;
     color: white;
     text-align: center;
+  }
+
+  .dragIcon {
+    cursor: grab;
   }
 `;
 
