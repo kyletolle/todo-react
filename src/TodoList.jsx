@@ -13,19 +13,13 @@ const UnstyledTodoList = observer(({
 }) => {
   const { todos } = todoStore;
   const todoItems = todos.map((todoItem, todoIndex) => {
-    const toggleCheckbox = () => {
-      // eslint-disable-next-line no-param-reassign
-      todoItem.completed = !todoItem.completed
-    };
 
     const todoKey = `${todoIndex}`;
     return (
       <TodoItem
         key={todoKey}
         index={todoIndex}
-        text={todoItem.text}
-        completed={todoItem.completed}
-        toggleChecked={toggleCheckbox}
+        todo={todoItem}
         handleDragStart={handleDragStart}
         handleDragOver={handleDragOver}
         handleDrop={handleDrop}

@@ -8,16 +8,20 @@ import todoStore from "./ObservableTodoStore";
 const UnstyledTodoItem = observer(({
   className,
   index,
-  text,
-  completed,
-  toggleChecked,
+  todo,
   handleDragStart,
   handleDragOver,
   handleDrop,
 }) => {
+  const { completed, text } = todo;
   const todoId = `todoItem${index}`;
   const todoKey = `${index}`;
   const todoItemClassName = completed ? "disabled" : "";
+
+  const toggleCompleted = () => {
+    // eslint-disable-next-line no-param-reassign
+    todo.completed = !todo.completed
+  };
 
   const handleDelete = (event) => {
     event.preventDefault();
@@ -42,7 +46,7 @@ const UnstyledTodoItem = observer(({
           type="checkbox"
           id={todoId}
           checked={completed}
-          onChange={toggleChecked}
+          onChange={toggleCompleted}
         />
         <span className="todoText">{text}</span>
         <button type="button" className="delete" onClick={handleDelete}>
@@ -56,9 +60,7 @@ const UnstyledTodoItem = observer(({
 UnstyledTodoItem.propTypes = {
   className: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
-  completed: PropTypes.bool.isRequired,
-  toggleChecked: PropTypes.func.isRequired,
+  todo: PropTypes.shape({ text: PropTypes.string.isRequired, completed: PropTypes.bool.isRequired}).isRequired,
   handleDragStart: PropTypes.func.isRequired,
   handleDragOver: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,
