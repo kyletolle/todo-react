@@ -3,11 +3,10 @@ import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { observer } from 'mobx-react-lite';
 import TodoItem from "./TodoItem";
-import { ObservableTodoStore } from "./ObservableTodoStore";
+import todoStore from "./ObservableTodoStore";
 
 const UnstyledTodoList = observer(({
   className,
-  todoStore,
   handleDragStart,
   handleDragOver,
   handleDrop,
@@ -23,7 +22,6 @@ const UnstyledTodoList = observer(({
     return (
       <TodoItem
         key={todoKey}
-        todoStore={todoStore}
         index={todoIndex}
         text={todoItem.text}
         completed={todoItem.completed}
@@ -50,7 +48,6 @@ const UnstyledTodoList = observer(({
 
 UnstyledTodoList.propTypes = {
   className: PropTypes.string.isRequired,
-  todoStore: PropTypes.instanceOf(ObservableTodoStore).isRequired,
   handleDragStart: PropTypes.func.isRequired,
   handleDragOver: PropTypes.func.isRequired,
   handleDrop: PropTypes.func.isRequired,

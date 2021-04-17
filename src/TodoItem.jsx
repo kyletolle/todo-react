@@ -2,12 +2,11 @@ import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
 import { observer } from 'mobx-react-lite';
-import { ObservableTodoStore } from "./ObservableTodoStore";
+import todoStore from "./ObservableTodoStore";
 
 
 const UnstyledTodoItem = observer(({
   className,
-  todoStore,
   index,
   text,
   completed,
@@ -56,7 +55,6 @@ const UnstyledTodoItem = observer(({
 
 UnstyledTodoItem.propTypes = {
   className: PropTypes.string.isRequired,
-  todoStore: PropTypes.instanceOf(ObservableTodoStore).isRequired,
   index: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,

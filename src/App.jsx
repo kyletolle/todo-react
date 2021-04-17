@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import { observer } from 'mobx-react-lite';
 import TodoList from "./TodoList";
 import AddTodo from "./AddTodo";
-import { ObservableTodoStore } from "./ObservableTodoStore";
+import todoStore from "./ObservableTodoStore";
 
 // Following drag and drop tutorial at
 // https://dev.to/florantara/creating-a-drag-and-drop-list-with-react-hooks-4c0i
@@ -16,7 +16,7 @@ const initialDnDState = {
   updatedOrder: [],
 }
 
-const UnstyledApp = observer(({ className, todoStore }) => {
+const UnstyledApp = observer(({ className }) => {
   const { todos } = todoStore;
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
@@ -108,7 +108,6 @@ const UnstyledApp = observer(({ className, todoStore }) => {
 
 UnstyledApp.propTypes = {
   className: PropTypes.string.isRequired,
-  todoStore: PropTypes.instanceOf(ObservableTodoStore).isRequired,
 };
 
 const App = styled(UnstyledApp)`
