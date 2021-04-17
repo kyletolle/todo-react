@@ -20,16 +20,6 @@ const UnstyledApp = observer(({ className }) => {
   const { todos } = todoStore;
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
-  const handleAddTodo = (formSubmitEvent) => {
-    formSubmitEvent.preventDefault();
-
-    const todoElement = document.getElementById("addTodo");
-    const newTodoText = todoElement.value;
-
-    todoStore.addTodo(newTodoText)
-    todoElement.value = "";
-  };
-
   const handleDragStart = (dragEvent) => {
     // Access the "data-position" attr of the current element being dragged
     const initialPosition = Number(dragEvent.currentTarget.dataset.position);
@@ -90,10 +80,9 @@ const UnstyledApp = observer(({ className }) => {
 
   return (
     <div className={className}>
-      <form onSubmit={handleAddTodo}>
-        <AddTodo />
+      <AddTodo />
 
-        <hr />
+      <hr />
 
         <TodoList
           todoStore={todoStore}
@@ -101,7 +90,7 @@ const UnstyledApp = observer(({ className }) => {
           handleDragOver={handleDragOver}
           handleDrop={handleDrop}
         />
-      </form>
+
     </div>
   );
 });

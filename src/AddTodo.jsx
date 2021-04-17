@@ -1,12 +1,25 @@
 import React from "react";
 import styled from "@emotion/styled";
 import PropTypes from "prop-types";
+import todoStore from "./ObservableTodoStore";
 
 function UnstyledAddTodo({ className }) {
+  const handleAddTodo = (formSubmitEvent) => {
+    formSubmitEvent.preventDefault();
+
+    const todoElement = document.getElementById("addTodo");
+    const newTodoText = todoElement.value;
+
+    todoStore.addTodo(newTodoText)
+    todoElement.value = "";
+  };
+
   return (
-    <div className={className}>
-      <input type="text" id="addTodo" placeholder="Add a Todo" />
-    </div>
+    <form onSubmit={handleAddTodo}>
+      <div className={className}>
+        <input type="text" id="addTodo" placeholder="Add a Todo" />
+      </div>
+    </form>
   );
 }
 
