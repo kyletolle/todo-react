@@ -8,6 +8,7 @@ class ObservableTodoStore {
       todos: observable,
       completedTodosCount: computed,
       incompletedTodosCount: computed,
+      totalTodosCount: computed,
       loadTodos: action,
       addTodo: action,
       deleteTodoAt: action,
@@ -27,7 +28,11 @@ class ObservableTodoStore {
   get incompletedTodosCount() {
     return this.todos.filter(
       todo => todo.completed === false
-    )
+    ).length
+  }
+
+  get totalTodosCount() {
+    return this.todos.length;
   }
 
   get report() {

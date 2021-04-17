@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styled from "@emotion/styled";
 import { observer } from 'mobx-react-lite';
 import TodoList from "./TodoList";
+import TodoStats from "./TodoStats";
 import AddTodo from "./AddTodo";
 import todoStore from "./ObservableTodoStore";
 
@@ -84,6 +85,7 @@ const UnstyledApp = observer(({ className }) => {
 
       <hr />
 
+     <div className="sideBySide">
         <TodoList
           todoStore={todoStore}
           handleDragStart={handleDragStart}
@@ -91,6 +93,8 @@ const UnstyledApp = observer(({ className }) => {
           handleDrop={handleDrop}
         />
 
+      <TodoStats />
+     </div>
     </div>
   );
 });
@@ -109,19 +113,17 @@ const App = styled(UnstyledApp)`
   font-size: calc(10px + 2vmin);
   color: white;
 
-  form {
-    padding-top: 1em;
-  }
-
   hr {
     border: 1px solid #61dafb;
     margin: 2em 0;
+    width: 80vw;
   }
 
-  ul {
+  .sideBySide {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    gap: 2vw;
   }
 `;
 

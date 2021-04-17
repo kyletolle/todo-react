@@ -48,6 +48,17 @@ UnstyledTodoList.propTypes = {
 };
 
 const TodoList = styled(UnstyledTodoList)`
+  min-width: 25vwmin;
+  width: 40vw;
+  border-right: 5px solid #61dafb;
+  padding-right: 2vw;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   li {
     /* Specify this style here so the empty state will get it too. */
     list-style: none;

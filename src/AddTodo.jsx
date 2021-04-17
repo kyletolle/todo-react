@@ -28,13 +28,16 @@ UnstyledAddTodo.propTypes = {
 };
 
 const AddTodo = styled(UnstyledAddTodo)`
+  padding-top: 5vh;
+
   input[type="text"] {
+    font-size: calc(8px + 2vmin);
     border: 1px solid #61dafb;
     border-radius: 0.5em;
     padding: 1em;
     margin: 0 0 1em;
     display: block;
-    width: 50em;
+    width: 80vw;
     color: white;
     background: #3c4048;
   }
