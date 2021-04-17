@@ -1,4 +1,4 @@
-import { action, autorun, computed, makeObservable, observable, reaction } from "mobx";
+import { action, autorun, computed, makeObservable, observable } from "mobx";
 
 class ObservableTodoStore {
   constructor() {
@@ -8,8 +8,9 @@ class ObservableTodoStore {
       todos: observable,
       completedTodosCount: computed,
       incompletedTodosCount: computed,
-      addTodo: action,
       loadTodos: action,
+      addTodo: action,
+      deleteTodoAt: action,
     })
     /* eslint-disable-next-line no-console */
     autorun(() => console.info(this.report))
@@ -59,6 +60,13 @@ class ObservableTodoStore {
     const existingTodoData = JSON.parse(existingTodoDataString);
     const loadedTodos = existingTodoData.todos;
     this.todos = loadedTodos;
+  }
+
+  deleteTodoAt(todoIndex) {
+    const { todos } = this;
+    const newTodos = [...todos];
+    newTodos.splice(todoIndex, 1);
+    this.setTodos(newTodos);
   }
 
   saveTodos() {

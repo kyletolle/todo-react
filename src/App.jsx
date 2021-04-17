@@ -35,10 +35,7 @@ const UnstyledApp = observer(({ className, todoStore }) => {
   };
 
   const handleTodoDeleted = (todoIndex) => {
-    console.info("Handling a Todo Delete");
-    const newTodos = [...todos];
-    newTodos.splice(todoIndex, 1);
-    todoStore.setTodos(newTodos);
+    todoStore.deleteTodoAt(todoIndex)
   };
 
   const handleDragStart = (dragEvent) => {
