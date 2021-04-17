@@ -1,4 +1,4 @@
-import { action, autorun, computed, makeObservable, observable } from "mobx";
+import { action, autorun, computed, makeObservable, observable, reaction } from "mobx";
 
 class ObservableTodoStore {
   constructor() {
@@ -9,9 +9,12 @@ class ObservableTodoStore {
       completedTodosCount: computed,
       incompletedTodosCount: computed,
       addTodo: action,
+      loadTodos: action,
     })
     /* eslint-disable-next-line no-console */
     autorun(() => console.info(this.report))
+    this.loadTodos();
+    autorun(() => this.saveTodos())
   }
 
   get completedTodosCount() {
@@ -44,6 +47,23 @@ class ObservableTodoStore {
       updatedAt: Date.now(),
       assignee: null,
     });
+  }
+
+  loadTodos() {
+    // Load from localstorage if data is there
+    const existingTodoDataString = window.localStorage.getItem("tododata");
+    if (!existingTodoDataString) {
+      return;
+    }
+
+    const existingTodoData = JSON.parse(existingTodoDataString);
+    const loadedTodos = existingTodoData.todos;
+    this.todos = loadedTodos;
+  }
+
+  saveTodos() {
+    const { todos } = this;
+    window.localStorage.setItem("tododata", JSON.stringify({ todos }));
   }
 
   setTodos(newTodos) {

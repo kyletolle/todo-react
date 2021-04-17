@@ -20,23 +20,6 @@ const UnstyledApp = observer(({ className, todoStore }) => {
   const { todos } = todoStore;
   const [dragAndDrop, setDragAndDrop] = useState(initialDnDState);
 
-  useEffect(() => {
-    // Load from localstorage if data is there
-    const existingTodoDataString = window.localStorage.getItem("tododata");
-    if (!existingTodoDataString) {
-      return;
-    }
-
-    const existingTodoData = JSON.parse(existingTodoDataString);
-    const loadedTodos = existingTodoData.todos;
-    todoStore.setTodos(loadedTodos)
-  }, []);
-
-  useEffect(() => {
-    // Write to localstorage when todos change
-    window.localStorage.setItem("tododata", JSON.stringify({ todos }));
-  }, [todos]);
-
   const handleAddTodo = (formSubmitEvent) => {
     formSubmitEvent.preventDefault();
 
