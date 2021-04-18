@@ -19,8 +19,15 @@ const UnstyledTodoItem = observer(({
   const todoItemClassName = completed ? "disabled" : "";
 
   const toggleCompleted = () => {
-    // eslint-disable-next-line no-param-reassign
+    /* eslint-disable no-param-reassign */
     todo.completed = !todo.completed
+    if (todo.completed) {
+      todo.completedAt = Date.now();
+    } else {
+      todo.completedAt = null;
+    }
+    todo.updatedAt = Date.now();
+    /* eslint-enable no-param-reassign */
   };
 
   const handleDelete = (event) => {
