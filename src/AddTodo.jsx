@@ -31,7 +31,7 @@ const AddTodo = styled(UnstyledAddTodo)`
   padding-top: 5vh;
 
   input[type="text"] {
-    font-size: calc(8px + 2vmin);
+    font-size: calc(8px + 1.5vmin);
     border: 1px solid #61dafb;
     border-radius: 0.5em;
     padding: 1em;

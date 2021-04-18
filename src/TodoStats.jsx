@@ -27,16 +27,14 @@ const TodoStats = styled(UnstyledTodoStats)`
   min-width: 25vwmin;
   width: 33vw;
 
-  h1 {
-    display: inline;
-    font-size: calc(10px + 2vmin);
-    width: 50%;
-    color: #61dafb;;
-    border-bottom: 2px solid #61dafb;
-  }
 
   p {
-    font-size: calc(8px + 2vmin);
+    padding-left: 1em;
+    font-size: calc(8px + 1.5vmin);
+  }
+
+  @media screen and (max-width: 480px) {
+    width: 80vw;
   }
 `;
 

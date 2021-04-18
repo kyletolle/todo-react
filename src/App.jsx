@@ -110,7 +110,7 @@ const App = styled(UnstyledApp)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1.5vmin);
   color: white;
 
   hr {
@@ -124,6 +124,22 @@ const App = styled(UnstyledApp)`
     flex-direction: row;
     justify-content: center;
     gap: 2vw;
+  }
+
+  h1 {
+    font-size: calc(10px + 1.5vmin);
+    width: 50%;
+    color: #61dafb;;
+    border-bottom: 2px solid #61dafb;
+  }
+
+  @media screen and (max-width: 480px) {
+    border-right: 0px;
+    border-bottom: 5px solid #61dafb;
+
+    .sideBySide {
+      flex-direction: column;
+    }
   }
 `;
 
