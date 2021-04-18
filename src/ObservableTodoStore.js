@@ -8,6 +8,7 @@ class ObservableTodoStore {
       todos: observable,
       completedTodosCount: computed,
       incompletedTodosCount: computed,
+      totalTodosCount: computed,
       loadTodos: action,
       addTodo: action,
       deleteTodoAt: action,
@@ -15,19 +16,31 @@ class ObservableTodoStore {
     /* eslint-disable-next-line no-console */
     autorun(() => console.info(this.report))
     this.loadTodos();
-    autorun(() => this.saveTodos())
+    autorun(() => this.saveTodos());
+  }
+
+  get completedTodos() {
+    return this.todos.filter(
+      todo => todo.completed === true
+    );
   }
 
   get completedTodosCount() {
+    return this.completedTodos.length;
+  }
+
+  get incompletedTodos() {
     return this.todos.filter(
-      todo => todo.completed === true
-    ).length;
+      todo => todo.completed === false
+    );
   }
 
   get incompletedTodosCount() {
-    return this.todos.filter(
-      todo => todo.completed === false
-    )
+    return this.incompletedTodos.length;
+  }
+
+  get totalTodosCount() {
+    return this.todos.length;
   }
 
   get report() {

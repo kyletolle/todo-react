@@ -67,11 +67,12 @@ UnstyledTodoItem.propTypes = {
 };
 
 const TodoItem = styled(UnstyledTodoItem)`
+  width: 100%;
+
   label {
     border: 1px solid #61dafb;
     padding: 1em;
     margin: 0 0 1em;
-    width: 15em;
     display: flex;
     flex-direction: row;
     align-items: center;
