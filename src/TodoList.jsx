@@ -127,14 +127,14 @@ const UnstyledTodoList = observer(({
   return (
     <div className={className}>
       <div className='todoGroup'>
-        <h1>Todo</h1>
+        <h1>Todo ({incompletedTodosCount}/{totalTodosCount})</h1>
         <ul>
           {incompletedTodosCount > 0 ? incompletedTodoItems : incompletedEmptyStateMessage}
         </ul>
       </div>
 
       <div className='todoGroup'>
-        <h1 className={className}>Done</h1>
+        <h1>Done ({completedTodosCount}/{totalTodosCount})</h1>
         <ul>
           {completedTodosCount > 0 ? completedTodoItems : completedEmptyStateMessage}
         </ul>
