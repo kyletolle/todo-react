@@ -24,8 +24,8 @@ const TodoStats = styled(UnstyledTodoStats)`
   display: flex;
   flex-direction: column;
   color: white;
-  min-width: 25vwmin;
-  width: 33vw;
+  min-width: 15vwmin;
+  width: 20vw;
 
 
   p {
@@ -34,7 +34,7 @@ const TodoStats = styled(UnstyledTodoStats)`
   }
 
   @media screen and (max-width: 480px) {
-    width: 80vw;
+    width: 85vw;
   }
 `;
 

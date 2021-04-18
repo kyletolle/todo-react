@@ -86,7 +86,7 @@ UnstyledTodoList.propTypes = {
 
 const TodoList = styled(UnstyledTodoList)`
   min-width: 25vwmin;
-  width: 40vw;
+  width: 50vw;
   border-right: 5px solid #61dafb;
   display: flex;
   flex-direction: column;
@@ -115,7 +115,7 @@ const TodoList = styled(UnstyledTodoList)`
   }
 
   @media screen and (max-width: 480px) {
-    width: 80vw;
+    width: 85vw;
     border-right: 0px;
     border-bottom: 5px solid #61dafb;
 
