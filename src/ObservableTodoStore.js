@@ -6,6 +6,7 @@ class ObservableTodoStore {
 
     makeObservable(this, {
       todos: observable,
+      sortedTodos: computed,
       completedTodosCount: computed,
       incompletedTodosCount: computed,
       totalTodosCount: computed,
@@ -20,9 +21,7 @@ class ObservableTodoStore {
   }
 
   get completedTodos() {
-    return this.todos.filter(
-      todo => todo.completed === true
-    );
+    return this.todos.filter(todo => todo.completed);
   }
 
   get completedTodosCount() {
@@ -30,9 +29,7 @@ class ObservableTodoStore {
   }
 
   get incompletedTodos() {
-    return this.todos.filter(
-      todo => todo.completed === false
-    );
+    return this.todos.filter(todo => !todo.completed);
   }
 
   get incompletedTodosCount() {
@@ -41,6 +38,10 @@ class ObservableTodoStore {
 
   get totalTodosCount() {
     return this.todos.length;
+  }
+
+  get sortedTodos() {
+    return this.incompletedTodos.concat(this.completedTodos);
   }
 
   get report() {
@@ -66,7 +67,7 @@ class ObservableTodoStore {
   loadTodos() {
     // Load from localstorage if data is there
     const existingTodoDataString = window.localStorage.getItem("tododata");
-    if (!existingTodoDataString) {
+    if (!existingTodoDataString || existingTodoDataString === '') {
       return;
     }
 
@@ -76,15 +77,15 @@ class ObservableTodoStore {
   }
 
   deleteTodoAt(todoIndex) {
-    const { todos } = this;
-    const newTodos = [...todos];
+    const { sortedTodos } = this;
+    const newTodos = [...sortedTodos];
     newTodos.splice(todoIndex, 1);
     this.setTodos(newTodos);
   }
 
   saveTodos() {
-    const { todos } = this;
-    window.localStorage.setItem("tododata", JSON.stringify({ todos }));
+    const { sortedTodos } = this;
+    window.localStorage.setItem("tododata", JSON.stringify({ todos: sortedTodos }));
   }
 
   setTodos(newTodos) {
